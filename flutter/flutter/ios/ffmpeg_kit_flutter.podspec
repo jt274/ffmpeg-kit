@@ -15,10 +15,25 @@ Pod::Spec.new do |s|
   s.source_files        = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
 
-  s.default_subspec     = 'https'
+  s.default_subspec     = 'ffmpeg-kit-ios-x264'
 
   s.dependency          'Flutter'
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
+
+  s.subspec 'ffmpeg-kit-ios-x264' do |ss|
+      ss.source_files       = '**/FFmpegKitFlutterPlugin.h',
+                              '**/FFmpegKitFlutterPlugin.m'
+                              #'bundle-apple-framework-ios/**/*.{h,m,swift}'
+      ss.vendored_frameworks = 'bundle-apple-framework-ios/ffmpegkit.framework',
+                              'bundle-apple-framework-ios/libavcodec.framework',
+                              'bundle-apple-framework-ios/libavdevice.framework',
+                              'bundle-apple-framework-ios/libavfilter.framework',
+                              'bundle-apple-framework-ios/libavformat.framework',
+                              'bundle-apple-framework-ios/libavutil.framework',
+                              'bundle-apple-framework-ios/libswresample.framework',
+                              'bundle-apple-framework-ios/libswscale.framework'
+      ss.ios.deployment_target = '12.1'
+  end
 
   s.subspec 'min' do |ss|
     ss.source_files         = 'Classes/**/*'
